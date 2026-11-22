@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets and runtime data (never commit)
+conf/dec.txt
+conf/key.*
+conf/*.dll
+static/users.json
+static/*.enc
+static/*.txt
+!static/spy/spy.txt
+visitors_log.txt
+uploads/*
+!uploads/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/

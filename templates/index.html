@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONYX Secure Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='/src/CSS/style.css') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <form method="POST" action="/space">
+    <center>
+      <div>
+        <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="ONYX Protection System Logo" />
+      </div>
+    </center>
+
+    <div class="container">
+      <center>
+        <h1>Hi, what can I do for you?</h1>
+
+        <br />
+
+        <div>
+          <button type="submit" class="c" name="action" value="custmer">
+            <img class="ic" src="{{ url_for('static', filename='GIF/cust.gif') }}" />
+            <br />
+            <br />
+            Client
+          </button>
+
+          <button type="submit" class="w" name="action" value="worker">
+            <img class="ic" src="{{ url_for('static', filename='GIF/worker.gif') }}" />
+            <br />
+            <br />
+            Agent
+          </button>
+        </div>
+      </center>
+    </div>
+  </form>
+
+</body>
+
+</html>

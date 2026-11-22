@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX Secure Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/src/CSS/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+</head>
+
+<body>
+    <form method="POST" action="/space2">
+        <div class="container">
+            <center>
+                <div>
+                    <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}"
+                        alt="ONYX Protection System Logo">
+                </div>
+                <h1> hi what service can i do it to you </h1>
+                <br>
+                <div>
+                    <button class="c" type="submit" name="action" value="chat"><img class="ic"
+                            src="{{ url_for('static', filename='GIF/ch.gif') }}">
+                        <br>
+                        Chatting
+                    </button>
+
+                    <button class="w" type="submit" name="action" value="work"><img class="ic"
+                            src="{{ url_for('static', filename='GIF/work.gif') }}">
+                        <br>
+                        Work Files
+                    </button>
+                </div>
+            </center>
+        </div>
+    </form>
+    
+</body>
+
+</html>

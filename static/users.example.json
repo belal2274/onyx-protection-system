@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "change-me",
+      "role": "member",
+      "mac_addresses": ["AA-BB-CC-DD-EE-FF"]
+    },
+    {
+      "username": "guest1",
+      "password": "change-me",
+      "role": "guest",
+      "mac_addresses": ["11-22-33-44-55-66"]
+    }
+  ]
+}

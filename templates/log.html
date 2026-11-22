@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX Secure Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/src/CSS/style2.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+</head>
+
+<body>
+    <form method="POST" action="/space0">
+        <center>
+            <div class="login-container">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ONYX Protection System Logo">
+                </div>
+                <h2>ONYX SECURE LOGIN</h2>
+
+                <div class="form-group">
+                    <label for="name">Username</label>
+                    <input type="text" id="name" name=name required placeholder="Enter your username">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <br>
+                <div class="code form-group">
+                    <label for="company code">Company Code (Optional)</label>
+                    <input type="password" id="code" name="code" placeholder="Enter Company Code">
+                </div>
+                <br> <br>
+                <button type="submit">Next</button>
+            </div>
+
+
+        </center>
+    </form>
+    
+</body>
+
+</html>

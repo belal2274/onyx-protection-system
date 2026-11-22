@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/src/CSS/style3.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+</head>
+<body>
+
+    <form method="POST" action="/space3">
+        <center>
+            <div class="container">
+                <h1> thank you for visiting our site </h1>
+                <br>
+                <h3> here is your data </h3>    
+                <br>
+                <a href="{{ url_for('static', filename='schedule.xlsx') }}" download><img src="{{ url_for('static', filename='GIF/x.gif') }}" >
+                <br>
+                جدول نبطشيات
+                </a>    
+                <br>
+                <a href="{{ url_for('chg') }}" class="button">Back</a>
+            </div>
+        </center>
+    </form>
+    
+</body>
+</html>

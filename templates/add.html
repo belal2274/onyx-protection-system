@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX Add Member</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/src/CSS/style2.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+</head>
+<body>
+    <form method="POST" action="/space5">
+        <center>
+            <div class="login-container">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ONYX Protection System Logo">
+                </div>
+                <h2>ADD NEW MEMBER</h2>
+
+                <div class="form-group">
+                    <label for="name">Username</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter username">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="pw">Password</label>
+                    <input type="password" id="pw" name="pw" required placeholder="Enter password">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="guest">Guest</option>
+                        <option value="member">Member</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="mac">MAC Address</label>
+                    <div class="mac-select-container">
+                        <select id="mac" name="mac" required class="mac-select">
+                            <option value="" disabled selected>Select MAC Address</option>
+                            {% for mac in available_macs %}
+                            {% if mac == server_mac %}
+                            <option value="{{ mac }}" selected>{{ mac }} (This Server)</option>
+                            {% else %}
+                            <option value="{{ mac }}">{{ mac }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        <button type="button" id="refresh-mac" class="refresh-button">
+                            <span id="refresh-icon">⟳</span>
+                            <span id="loading-spinner" class="loading-spinner" style="display: none;"></span>
+                        </button>
+                    </div>
+                    <div id="refresh-status" class="refresh-status"></div>
+                </div>
+                <br><br>
+                <button type="submit">Add Member</button>
+                {% if error %}
+                <div class="error-message" style="color: red; margin-top: 10px;">{{ error }}</div>
+                {% endif %}
+            </div>
+        </center>
+    </form>
+
+    <script>
+        document.getElementById('refresh-mac').addEventListener('click', function() {
+            const refreshBtn = this;
+            const refreshIcon = document.getElementById('refresh-icon');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const statusElement = document.getElementById('refresh-status');
+            
+            refreshBtn.disabled = true;
+            refreshIcon.style.display = 'none';
+            loadingSpinner.style.display = 'inline-block';
+            statusElement.textContent = 'Scanning network...';
+            statusElement.style.color = '#00c3ff';
+            
+            fetch('/refresh_macs')
+                .then(response => response.json())
+                .then(data => {
+                    const macSelect = document.getElementById('mac');
+                    const selectedValue = macSelect.value;
+                    
+                    macSelect.innerHTML = '<option value="" disabled selected>Select MAC Address</option>';
+                    
+                    data.available_macs.forEach(mac => {
+                        const option = document.createElement('option');
+                        option.value = mac;
+                        if (mac === data.server_mac) {
+                            option.textContent = mac + ' (This Server)';
+                            option.selected = true;
+                        } else {
+                            option.textContent = mac;
+                        }
+                        macSelect.appendChild(option);
+                    });
+                    
+                    if (selectedValue && data.available_macs.includes(selectedValue)) {
+                        macSelect.value = selectedValue;
+                    }
+                    
+                    statusElement.textContent = `Found ${data.available_macs.length} devices`;
+                    statusElement.style.color = '#0aefb1';
+                })
+                .catch(error => {
+                    console.error('Error refreshing MACs:', error);
+                    statusElement.textContent = 'Error scanning network';
+                    statusElement.style.color = '#ff6b6b';
+                })
+                .finally(() => {
+                    refreshBtn.disabled = false;
+                    refreshIcon.style.display = 'inline-block';
+                    loadingSpinner.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        statusElement.textContent = '';
+                    }, 3000);
+                });
+        });
+    </script>
+</body>
+</html>
